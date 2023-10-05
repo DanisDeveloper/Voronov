@@ -1,12 +1,12 @@
 int[][] matrix;
 ArrayList<Point> points;
 ArrayList<Integer> colorPoints;
-int cellSize = 5;
+int cellSize = 10;
 int H;
 int W;
 
 void setup(){
-  size(640,480);
+  size(1000,800);
   H = height/cellSize;
   W = width/cellSize;
   matrix = new int[H][W];
@@ -24,9 +24,6 @@ void voronov(){
         int diffx = (j-points.get(k).x);
         int diffy = (i-points.get(k).y);
         int d = diffx*diffx + diffy*diffy;
-        //if(d == min){
-        //  matrix[i][j] = -1;
-        //} else if
         if(d < min){
           min = d;
           indexMin = k;
