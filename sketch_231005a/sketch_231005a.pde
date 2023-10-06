@@ -1,6 +1,5 @@
 int[][] matrix;
 ArrayList<Point> points;
-ArrayList<Integer> colorPoints;
 int cellSize = 10;
 int H;
 int W;
@@ -11,7 +10,6 @@ void setup(){
   W = width/cellSize;
   matrix = new int[H][W];
   points = new ArrayList<Point>();
-  colorPoints = new ArrayList<Integer>();
   //noStroke();
 }
 
@@ -38,8 +36,8 @@ void draw(){
   background(200);
   for(int i=0;i<matrix.length;++i){
     for(int j=0;j<matrix[i].length;++j){
-      if(colorPoints.size()!=0)
-        fill(colorPoints.get(matrix[i][j]));
+      if(points.size()!=0)
+        fill(points.get(matrix[i][j]).col);
       else fill(255);
       rect(j*cellSize,i*cellSize,cellSize,cellSize);
     }
@@ -61,10 +59,9 @@ void draw(){
       }
     }
     if(flag){
-      Point temp = new Point(x,y);
-      points.add(temp);
       color tempColor = color(random(0,255),random(0,255),random(0,255));
-      colorPoints.add(tempColor);
+      Point temp = new Point(x,y,tempColor);
+      points.add(temp);
       voronov();
     }
   }
