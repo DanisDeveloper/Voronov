@@ -1,8 +1,9 @@
 int[][] matrix;
 ArrayList<Point> points;
-int cellSize = 10;
+int cellSize = 1;
 int H;
 int W;
+int D = 90;
 
 void setup(){
   size(1000,800);
@@ -10,7 +11,43 @@ void setup(){
   W = width/cellSize;
   matrix = new int[H][W];
   points = new ArrayList<Point>();
-  //noStroke();
+  noStroke();
+  
+  int x = 0;
+  int y = 0;
+  color tempColor = color(random(0,255),random(0,255),random(0,255));
+  tempColor = color(map(x,0,W,0,255),map(y,0,H,255,0),map(y,0,H,0,255));
+  Point temp = new Point(x,y,tempColor);
+  points.add(temp);
+  while(x < W){
+    while(y < H){
+      y += D;
+      //tempColor = color(random(0,255),random(0,255),random(0,255));
+      tempColor = color(map(x,0,W,0,255),map(y,0,H,255,0),map(y,0,H,0,255));
+
+      Point t = new Point(x,y,tempColor);
+      points.add(t);
+    }
+    x+= (int)(sqrt(3)/2*D);
+    y -= D/2;
+    while(y > 0){
+      y -= D;
+      //tempColor = color(random(0,255),random(0,255),random(0,255));
+      tempColor = color(map(x,0,W,0,255),map(y,0,H,255,0),map(y,0,H,0,255));
+      Point t = new Point(x,y,tempColor);
+      points.add(t);
+    }
+  }
+  
+  //for(int i=0;i<6;++i){
+  //  int newX = (int)(-D*sin(TWO_PI/6.0*i));
+  //  int newY = (int)(D * cos(TWO_PI/6.0*i));
+  //  tempColor = color(random(0,255),random(0,255),random(0,255));
+  //  Point t = new Point(newX+x,newY+y,tempColor);
+  //  points.add(t);
+  //}
+  
+  voronov();
 }
 
 void voronov(){
